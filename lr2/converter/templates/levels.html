@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иерархические уровни</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Иерархические уровни:</h2>
+        <ul>
+            {% for level in levels %}
+                <li>{{ level }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Исходная матрица смежности:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for j in adjacency_matrix %}
+                        <th>{{ forloop.counter }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in adjacency_matrix %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        {% for j in i %}
+                            <td>{{ j }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Новая матрица смежности:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for j in new_adj_matrix %}
+                        <th>{{ forloop.counter }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in new_adj_matrix %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        {% for j in i %}
+                            <td>{{ j }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Соответствия старых и новых вершин:</h2>
+        <ul>
+            {% for old, new in old_to_new.items %}
+                <li>Старая вершина: {{ old }} → Новая вершина: {{ new }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'matrix_input' %}">Назад</a>
+    </div>
+</body>
+</html>
